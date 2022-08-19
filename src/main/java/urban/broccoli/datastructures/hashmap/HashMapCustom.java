@@ -72,6 +72,48 @@ public class HashMapCustom<K, V> {
     return null;
   }
   
+  public boolean remove(K deleteKey) {
+    int bucket = getHash(deleteKey) % getBucketSize();
+  
+    if (buckets[bucket] == null) {
+      return false;
+    } else {
+      Node<K, V> previous = null;
+      Node<K, V> current = buckets[bucket];
+      
+      while (current != null) { //have reached last entry node of bucket
+        if (current.key.equals(deleteKey)) {
+          if (previous == null) {  //delete first entry node
+            buckets[bucket] = buckets[bucket].next;
+            return true;
+          } else {
+            previous.next = current.next;
+            return true;
+          }
+        }
+        previous = current;
+        current = current.next;
+      }
+      return false;
+    }
+    
+  }
+  
+  public K contains(K key) {
+    int bucket = getHash(key) % getBucketSize();
+    if (buckets[bucket] == null) {
+      return null;
+    } else {
+      Node<K, V> temp = buckets[bucket];
+      while (temp != null) {
+        if (temp.key.equals(key))
+          return key;
+        temp = temp.next; //return value corresponding to key.
+      }
+      return null;   //returns null if key is not found.
+    }
+  }
+  
   public int size() {
     return size;
   }
