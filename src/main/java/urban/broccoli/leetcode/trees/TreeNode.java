@@ -1,5 +1,7 @@
 package urban.broccoli.leetcode.trees;
 
+import lombok.ToString;
+
 /**
  * A valid BST is defined as follows: *
  * The left subtree of a node contains only nodes with keys less than the node's key.
@@ -9,6 +11,7 @@ package urban.broccoli.leetcode.trees;
  * @author Ann Stesh
  */
 
+@ToString
 public class TreeNode {
   int val;
   TreeNode left;
