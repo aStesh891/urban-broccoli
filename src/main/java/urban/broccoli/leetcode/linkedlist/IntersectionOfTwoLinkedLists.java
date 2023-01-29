@@ -1,7 +1,5 @@
 package urban.broccoli.leetcode.linkedlist;
 
-import urban.broccoli.datastructures.arraylist.ArrayList;
-
 import java.util.HashSet;
 
 /**

@@ -14,9 +14,11 @@ public class MoveZeroes {
   public static void main(String[] args) {
     int[] array = {42, 0, 0, 8, 1, 0, 0, 6, 7, 0, 4};
     
-    System.out.println("result:" + Arrays.toString(moveZeroes(array)));
+    System.out.println("result:" + Arrays.toString(moveZeroesSnowBall(array)));
   }
-  
+
+  //Time complexity : O(n)
+  //Space complexity: O(1) - only swap elements on the existing array in-place
   private static int[] moveZeroes(int[] nums) {
     boolean unSorted = true;
     
@@ -32,6 +34,23 @@ public class MoveZeroes {
       }
     }
     
+    return nums;
+  }
+
+  //Time complexity : O(n)
+  //Space complexity: O(1) - only swap elements on the existing array in-place
+  private static int[] moveZeroesSnowBall(int[] nums) {
+    int snowBallSize = 0;
+
+    for (int i = 0; i < nums.length; i++) {
+      if (nums[i] == 0) {
+        snowBallSize++;
+      } else if (snowBallSize > 0) {
+        nums[i - snowBallSize] = nums[i];
+        nums[i] = 0;
+      }
+    }
+
     return nums;
   }
 }
