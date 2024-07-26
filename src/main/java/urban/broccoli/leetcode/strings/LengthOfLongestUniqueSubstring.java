@@ -19,6 +19,27 @@ public class LengthOfLongestUniqueSubstring {
 
   //Time and space complexity : O(n), n - length of the input string
   public static int lengthOfOfLongestUniqueSubstring(String s) {
+    int maxLength = 0;
+    int start = 0;
+    int end = 0;
+    HashMap<Character, Integer> charToIndex = new HashMap<>();
+
+    while (end < s.length()) {
+      char ch = s.charAt(end);
+
+      if (charToIndex.containsKey(ch) && charToIndex.get(ch) >= start) {
+        start = charToIndex.get(ch) + 1;
+      }
+
+      maxLength = Math.max(maxLength, end - start + 1);
+      charToIndex.put(ch, end);
+      end++;
+    }
+
+    return maxLength;
+  }
+
+  public static int lengthOfOfLongestUniqueSubstringForEach(String s) {
     Map<Character, Integer> map = new HashMap<>();
     int maxLength = 0;
     int start = 0;
