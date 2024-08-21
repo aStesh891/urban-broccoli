@@ -18,8 +18,41 @@ public class MissingNumber {
     
     System.out.println("result:" + missingNumber(array));
   }
-  
-  private static int missingNumber(int[] nums) {
+
+  //Runtime 0ms  Beats 100.00% !!!
+  //Time complexity : O(n)
+  //Space complexity: O(1)
+  public static int missingNumber(int[] nums) throws IllegalArgumentException {
+    int targetSum = 0;
+    int realSum = 0;
+
+    for (int target = 0; target < nums.length; target++) {
+      targetSum += target + 1;
+      realSum += nums[target];
+    }
+
+    return targetSum - realSum;
+  }
+
+  //Time complexity : O(n^2)
+  //Space complexity: O(1)
+  public static int missingNumberSimple(int[] nums) throws IllegalArgumentException {
+    for (int target = 0; target < nums.length + 1; target++) {
+
+      boolean isMissing = true;
+      for (int real = 0; real < nums.length && isMissing; real++) {
+        if (target == nums[real]) {
+          isMissing = false;
+        }
+      }
+      if (isMissing) return target;
+
+    }
+
+    throw new IllegalArgumentException("invalid input");
+  }
+
+  public static int missingNumberSorted(int[] nums) {
     Arrays.sort(nums);
   
     for (int i = 0; i < nums.length; i++) {
@@ -37,6 +70,6 @@ public class MissingNumber {
     for (int i = 0; i <= nums.length; i++) {
       if (!numsList.contains(i)) return i;
     }
-    return 0;
+    throw new IllegalArgumentException("invalid input");
   }
 }
